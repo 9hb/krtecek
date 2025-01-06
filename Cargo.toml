@@ -1,7 +1,13 @@
 [package]
 name = "krtek"
 version = "0.1.0"
+authors = ["9hb <github.com/9hb>"]
 edition = "2021"
+
+description = "Library for searching HTML elements using ID, tags, and class in HTML pages"
+license = "MIT"
+
+repository = "https://github.com/9hb/krtecek"
 
 [dependencies]
 reqwest = { version = "0.12.9", features = ["blocking", "json"] }
