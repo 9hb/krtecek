@@ -1,20 +1,20 @@
-# Krteček
+# HTMoLe (formerly known as Krtek)
 
-Knihovna pro hledání HTML elementů pomocí ID, tagů a class v HTML stránkách.
+Library for searching HTML elements using ID, tags, and class in HTML pages.
 
-## Použití
+## Usage
 
 ```rust
 use krtek::Krtecek;
 
 let krtecek = Krtecek::new("https://example.com")
-    .najit_id("username")
-    .najit_tag("h1")
-    .najit_class("container");
+    .find_id("username")
+    .find_tag("h1")
+    .find_class("container");
 ```
 
-## Příklad
+## Example
 
-![Ukázka kódu](assets/showcase-code-2.png)
+![Code example](https://raw.githubusercontent.com/9hb/krtecek/refs/heads/main/assets/showcase-code-2.png)
 
-![Výsledek kompilace](assets/showcase-terminal-2.png)
+![Compilation result](https://raw.githubusercontent.com/9hb/krtecek/refs/heads/main/assets/showcase-terminal-2.png)

@@ -1,15 +1,15 @@
 [package]
-name = "krtek"
-version = "0.2.0"
+name = "HTMoLe"
+version = "0.2.1"
 authors = ["9hb <github.com/9hb>"]
 edition = "2021"
 
-description = "Library for searching HTML elements using ID, tags, and class in HTML pages"
+description = "Library for searching HTML elements using ID, tags, and class in HTML pages. Formerly known as Krtek."
 license = "MIT"
 
 repository = "https://github.com/9hb/krtecek"
 
 [dependencies]
 reqwest = { version = "0.12.9", features = ["blocking", "json"] }
-scraper = "0.21.0"
+scraper = "0.22.0"
 tokio = { version = "1", features = ["full"] }

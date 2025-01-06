@@ -1,4 +1,4 @@
-//! # The Mole (Krteček)
+//! # HTMoLe (formerly known as Krtek)
 
 //! Library for searching HTML elements using ID, tags, and class in HTML pages.
 
