@@ -1,6 +1,6 @@
 [package]
 name = "krtek"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["9hb <github.com/9hb>"]
 edition = "2021"
 
