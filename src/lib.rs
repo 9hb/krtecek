@@ -1,77 +1,93 @@
+//! # The Mole (Krteček)
+
+//! Library for searching HTML elements using ID, tags, and class in HTML pages.
+
+//! ## Usage
+
+//! ```
+//! use krtek::Krtecek;
+
+//! let krtecek = Krtecek::new("https://example.com")
+//!     .find_id("username")
+//!     .find_tag("h1")
+//!     .find_class("container");
+//! ```
+//! ## Example
+
+//! ![Code example](https://raw.githubusercontent.com/9hb/krtecek/refs/heads/main/assets/showcase-code.png)
+
+//! ![Compilation result](https://raw.githubusercontent.com/9hb/krtecek/refs/heads/main/assets/showcase-terminal.png)
+
 use reqwest::{ blocking::get, Error };
 use scraper::{ Html, Selector };
 use std::collections::HashMap;
 
 pub struct Krtecek {
-    odkaz: String,
-    ids: Vec<String>, // Vec<String> pro vic; Option<String> pro jeden
+    link: String,
+    ids: Vec<String>,
     tags: Vec<String>,
     classes: Vec<String>,
 }
 
 impl Krtecek {
-    pub fn new(odkaz: impl Into<String>) -> Self {
-        // pub fn new(odkaz: String) -> Self { (s timhle je nutny u vseho psat .to_string)
+    pub fn new(link: impl Into<String>) -> Self {
         Krtecek {
-            odkaz: odkaz.into(), // odkaz,
-            ids: Vec::new(), // Vec::new() pro vice hledani najednou (None pro hledani od kazdeho druhu jednou)
+            link: link.into(),
+            ids: Vec::new(),
             tags: Vec::new(),
             classes: Vec::new(),
         }
     }
 
-    pub fn najit_id(mut self, id: impl Into<String>) -> Self {
+    pub fn find_id(mut self, id: impl Into<String>) -> Self {
         self.ids.push(id.into());
         self
     }
 
-    pub fn najit_tag(mut self, tag: impl Into<String>) -> Self {
+    pub fn find_tag(mut self, tag: impl Into<String>) -> Self {
         self.tags.push(tag.into());
         self
     }
 
-    pub fn najit_class(mut self, class: impl Into<String>) -> Self {
+    pub fn find_class(mut self, class: impl Into<String>) -> Self {
         self.classes.push(class.into());
         self
     }
 
-    pub fn zapnout(self) -> Result<HashMap<String, Vec<String>>, Error> {
-        let body = get(&self.odkaz)?.text()?;
-        let dokument = Html::parse_document(&body);
-        let mut vysledek = HashMap::new();
+    pub fn run(self) -> Result<HashMap<String, Vec<String>>, Error> {
+        let body = get(&self.link)?.text()?;
+        let document = Html::parse_document(&body);
+        let mut result = HashMap::new();
 
-        //  hleda element podle ID
         for id in self.ids {
-            let vybrat = format!("#{}", id);
-            let vyb = Selector::parse(&vybrat).unwrap();
-            let elementy: Vec<String> = dokument
-                .select(&vyb)
+            let choose = format!("#{}", id);
+            let ch = Selector::parse(&choose).unwrap();
+            let elements: Vec<String> = document
+                .select(&ch)
                 .map(|e| e.inner_html())
                 .collect();
-            vysledek.insert(format!("#{}", id), elementy);
+            result.insert(format!("#{}", id), elements);
         }
 
-        //  hleda element podle tagu
         for tag in self.tags {
-            let vyb = Selector::parse(&tag).unwrap();
-            let elementy: Vec<String> = dokument
-                .select(&vyb)
+            let ch = Selector::parse(&tag).unwrap();
+            let elements: Vec<String> = document
+                .select(&ch)
                 .map(|e| e.inner_html())
                 .collect();
-            vysledek.insert(tag, elementy);
+            result.insert(tag, elements);
         }
 
-        //  hleda element podle classy
         for class in self.classes {
-            let vybrat = format!(".{}", class);
-            let vyb = Selector::parse(&vybrat).unwrap();
-            let elementy: Vec<String> = dokument
-                .select(&vyb)
+            let choose = format!(".{}", class);
+            let ch = Selector::parse(&choose).unwrap();
+            let elements: Vec<String> = document
+                .select(&ch)
                 .map(|e| e.inner_html())
                 .collect();
-            vysledek.insert(format!(".{}", class), elementy);
+            result.insert(format!(".{}", class), elements);
         }
 
-        Ok(vysledek)
+        Ok(result)
     }
 }
