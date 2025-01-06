@@ -15,6 +15,6 @@ let krtecek = Krtecek::new("https://example.com")
 
 ## Příklad
 
-![Ukázka kódu](assets/showcase-code.png)
+![Ukázka kódu](assets/showcase-code-2.png)
 
-![Výsledek kompilace](assets/showcase-terminal.png)
+![Výsledek kompilace](assets/showcase-terminal-2.png)
