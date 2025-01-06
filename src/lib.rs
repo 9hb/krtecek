@@ -14,9 +14,9 @@
 //! ```
 //! ## Example
 
-//! ![Code example](https://raw.githubusercontent.com/9hb/krtecek/refs/heads/main/assets/showcase-code.png)
+//! ![Code example](https://raw.githubusercontent.com/9hb/krtecek/refs/heads/main/assets/showcase-code-2.png)
 
-//! ![Compilation result](https://raw.githubusercontent.com/9hb/krtecek/refs/heads/main/assets/showcase-terminal.png)
+//! ![Compilation result](https://raw.githubusercontent.com/9hb/krtecek/refs/heads/main/assets/showcase-terminal-2.png)
 
 use reqwest::{ blocking::get, Error };
 use scraper::{ Html, Selector };
